@@ -10,7 +10,6 @@ Feature: Find longest and shortest word from sentence
     When I search for "LONG" word from the sentence
     Then I am able to find "LONG" word with its length
     Then I get message "Word Found"
-
     When I search for "SHORT" word from the sentence
     Then I am able to find "SHORT" word with its length
     Then I get message "Word Found"

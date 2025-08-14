@@ -1,6 +1,5 @@
 package com.gk.test.framework.helpers;
 
-import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -81,7 +80,7 @@ public abstract class WebDriverHelper extends EventFiringWebDriver {
                     startPhantomJsDriver();
                     break;
                 case ("appium"):
-                    startAppiumDriver();
+//                    startAppiumDriver();
                     break;
                 case ("sauce"):
                     startSauceDriver();
@@ -149,16 +148,6 @@ public abstract class WebDriverHelper extends EventFiringWebDriver {
             }
         }
         REAL_DRIVER.manage().window().setSize(BROWSER_WINDOW_SIZE);
-    }
-
-
-    private static void startAppiumDriver() {
-        DesiredCapabilities capabilities = getAppiumDesiredCapabilities();
-        try {
-            REAL_DRIVER = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-        } catch (MalformedURLException e) {
-            LOG.error("Appium Server Error " + e.getMessage());
-        }
     }
 
     private static void startSauceDriver() {
@@ -235,15 +224,6 @@ public abstract class WebDriverHelper extends EventFiringWebDriver {
         capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
         capabilities
                 .setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, getDriverPath());
-        return capabilities;
-    }
-
-    private static DesiredCapabilities getAppiumDesiredCapabilities() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("device", "Android");
-        capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, PLATFORM);
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
         return capabilities;
     }
 
